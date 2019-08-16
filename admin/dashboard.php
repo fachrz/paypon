@@ -4,16 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../assets/fontawesome/css/all.css">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/style.css">
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="POST">
-        <p>Kode Pembayaran</p>
-        <input type="text" name="transaction-code" placeholder="masukan kode pembayaran">
-        <input type="submit" name="topup-confirm" value="Confirm">
-    </form>
+    <div class="container">
+        <form action="" method="POST">
+            <center><h1>Kode Pembayaran</h1></center>
+            <input class="form-control" type="text" name="transaction-code" placeholder="masukan kode pembayaran">
+            <input type="submit" name="topup-confirm" value="Confirm">
+        </form>
+        <a href="logout.php">Logout</a>
+    </div>
 <?php
-    require_once('../config/auth.php');
     require_once('../config/db_config.php');
 
     if (isset($_POST['topup-confirm'])) {
@@ -70,7 +75,7 @@
 </body>
 </html>
 
-<a href="logout.php">Logout</a>
+
 <br><br>
 
 
