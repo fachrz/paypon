@@ -35,7 +35,7 @@ function topup_hapus() {
 
 function checkConnectedBank() {
     $.ajax({
-        url: "api/bank_notification.php",
+        url: "../api/bank_notification.php",
         method : "POST",
         success: function(data) {
             $("#bank-card").html(data);
