@@ -14,7 +14,7 @@ $params = array(
 $deleterekening = $stmt->execute($params);
 
 if ($deleterekening) {
-    header('Location: bank.php');
+    header('Location: dashboard.php');
 }else{
     echo('Bank Gagal di putus');
 }
