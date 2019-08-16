@@ -14,8 +14,7 @@ $params = array(
 $topupdata = $stmt->execute($params);
 
 if ($topupdata) {
-    header('Location: top-up.php');
-}else{
-    echo('Data gagal dihapus');
+    header("Location: dashboard.php");
 }
+
 
