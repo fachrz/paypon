@@ -13,6 +13,7 @@ require_once('../config/auth.php');
 </head>
 <body>
     <?php
+    include '../template/navbar.php';
         $id_topup = $_GET['id'];
         $query = "SELECT * FROM top_up WHERE id_topup = :id_topup";
         $stmt = $dbh->prepare($query);
@@ -24,11 +25,18 @@ require_once('../config/auth.php');
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
     ?>
-    <h1>Top-up payment</h1>
-    <p>silahkan bayar di gerai Paypon terdekat senilai</p>
-    <h1>Rp.<?= $user['jumlah_topup'] ?></h1>
-    <h1>Kode Pembayaran</h1>
-    <h1><?= $user['kode_transaksi'] ?></h1>
+    <div class="container text-center">
+        <br>
+        <br>
+        <br>
+        <br>
+        <h1>Top-up payment</h1>
+        <p>silahkan bayar di gerai Paypon terdekat senilai</p><br>
+        <h1>Rp.<?= $user['jumlah_topup'] ?></h1><br>
+        <h1>Kode Pembayaran</h1>
+        <h1><?= $user['kode_transaksi'] ?></h1>
+    </div>
+    
 
     
 </body>

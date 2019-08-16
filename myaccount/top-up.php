@@ -10,9 +10,11 @@
     <?php
         require_once('../config/db_config.php');
         require_once('../config/auth.php');
+        include '../template/navbar.php';
     ?>
 
     <form action="" method="post">
+        <div class="container"></div>
         <input type="number" name="saldo-topup" placeholder="masukan jumlah topup" require>
         <input type="submit" name="top-up" value="top-up">
     </form>
@@ -28,9 +30,8 @@
         <?php
 
             $email = $_SESSION['user']['email'];
-
-            if (isset($_POST['top-up'])) {
-                $saldo_topup = filter_input(INPUT_POST, 'saldo-topup', FILTER_SANITIZE_STRING);
+            if (!empty($_POST)) {
+                $saldo_topup = filter_input(INPUT_POST, 'jumlah-topup', FILTER_SANITIZE_STRING);
                 $tgl_topup = date('Y-m-d H:i:s');
                 $status = "red";
 
@@ -53,7 +54,7 @@
 
                 if ($topup_insert) {
                     /* Get last top-up data */
-                    $query = "SELECT * FROM top_up ORDER BY id_topup DESC LIMIT 1";
+                    $query = "SELECT * FROM top_up WHERE email = :email ORDER BY id_topup DESC LIMIT 1";
                     $stmt = $dbh->prepare($query);
 
                     $params = array(
@@ -65,31 +66,6 @@
                     header("Location: top-up-confirm.php?id=".$last_topup['id_topup']);
                 }
             }
-            
-            $query = "SELECT * FROM top_up WHERE email = :email AND status = :status";
-            $stmt = $dbh->prepare($query);
-
-            $params = array(
-                ":email" => $email,
-                ":status" => "red"
-            );
-
-            $stmt->execute($params);
-            $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-            foreach ($user as $account) {?>
-                <tr>
-                    <td><?= $account['id_topup'] ?></td>
-                    <td><?= $account['jumlah_topup'] ?></td>
-                    <td><?= $account['tgl_topup'] ?></td>
-                    <td>Menunggu Pembayaran</td>
-                    <td>
-                        <a href="top-up-confirm.php?id=<?= $account['id_topup'] ?>">Detail</a>
-                        <a href="top-up-hapus.php?id=<?= $account['id_topup']?>">Hapus</a>
-                    </td>
-                    </tr>   
-            <?php } ?>
-    </table>
-    
+            ?>
 </body>
 </html>

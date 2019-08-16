@@ -10,6 +10,7 @@
     <?php
         require_once ('../config/auth.php');
         require_once ('../config/db_config.php');
+        include '../template/navbar.php';
 
         $email = $_SESSION['user']['email'];
         $query = "SELECT * FROM account WHERE email = :email";
@@ -23,7 +24,37 @@
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
     ?>
 
-        <form action="" method="post">
+    <div class="container">
+    <form class="border">
+        <div class="form-group col-md-3">
+            <label for="inputEmail4">Email</label>
+            <input type="email" class="form-control" id="inputEmail4" value="<?= $user['email'];?>" placeholder="Email" disabled>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputAddress">Nama</label>
+            <input type="text" class="form-control" id="inputAddress" value="<?= $user['nama']; ?>">
+        
+            <label for="inputPassword4">No Telpon</label>
+            <input type="text" class="form-control" id="inputPassword4" value="<?= $user['no_telp']; ?>">
+
+            <label for="inputAddress2">Address</label>
+            <input type="text" class="form-control" id="inputAddress2" value="<?= $user['alamat']; ?>">
+
+            <label for="inputCity">City</label>
+            <input type="text" class="form-control" id="inputCity">
+
+            <label for="inputZip">Zip</label>
+            <input type="text" class="form-control" id="inputZip">
+
+            <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>  
+
+        
+       
+</form>
+    </div>
+        
+        <form class="d-none" action="" method="post">
             <label for="">Email</label>
             <input type="text" name="email" value="<?= $user['email'];?>" disabled><br>
             <label for="">Password</label>
@@ -36,7 +67,6 @@
             <textarea name="alamat" id="" cols="30" rows="10"><?= $user['alamat']; ?></textarea>
             <input type="submit" name="account-data" value="Simpan">
             <a href="dashboard.php">Back</a>
-            
         </form>
 
         <?php
