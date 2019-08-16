@@ -1,0 +1,63 @@
+/* Login Form */
+.login-form{
+    max-width: 300px;
+    padding: 10px;
+    margin: 20px auto;
+    border-radius: 6px;
+    text-align: left;
+    
+}
+.login-container{
+    margin: auto;
+    text-align: center;
+    margin-top: 70px;
+}
+.login-container i{
+    font-size: 40px;
+}
+.login-container i, .login-container h1{
+    color: #9697a7  ;
+}
+
+
+
+.pp-sidebar{
+    padding: 0 10px !important;
+}
+.dashboard-container{
+    margin-top: 20px;
+}
+.dashboard-user{
+    padding: 30px 0;
+}
+.card-body i{
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #666;
+}
+.btn-topup{
+    margin-top: 10px;
+    border-radius: 70px;
+    padding: 5px 20px;
+    background: transparent;
+    color: #007bff
+}
+
+.nav-right{
+    float: right !important;
+}
+.card{
+    margin-bottom: 10px;
+}
+.delete-topup{
+    margin-right: 5px;  
+}
+.form-deskripsi{
+    margin-top: 10px;
+}
+.transfer-container{
+    margin-top: 10px;
+}
+.btn-transfer{
+    margin-top: 10px;
+}
