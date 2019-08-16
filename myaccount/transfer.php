@@ -10,13 +10,29 @@
     <?php
         require_once('../config/db_config.php');
         require_once('../config/auth.php');
+        include '../template/navbar.php';
     ?>
-    <form action="" method="post">
+    <div class="container transfer-container">
+        <form action="" method="post">
+            <div class="form-row">
+                <div class="col">
+                <input type="number" name="saldo-transfer" class="form-control" placeholder="Masukan Jumlah Transfer" required>
+                </div>
+                <div class="col">
+                <input type="text" name="email-tujuan" class="form-control" placeholder="Masukan Email Tujuan" required>
+                </div>
+            </div>
+            <input type="text" name="deskripsi" class="form-control form-deskripsi" placeholder="Masukan Deskripsi">
+            <button type="submit" name="transfer" class="btn btn-primary btn-transfer">Transfer</button>
+        </form>
+    </div>
+    <!-- <form action="" method="post">
         <input type="number" name="saldo-transfer" placeholder="masukan jumlah transfer" required>
         <input type="email" name="email-tujuan" placeholder="Masukan Email Tujuan" required>
         <input type="text" name="deskripsi" placeholder="Masukan deskripsi (Optional)">
         <input type="submit" name="transfer" value="Transfer">
     </form>
+     -->
     
     <?php
         if (isset($_POST['transfer'])) {
