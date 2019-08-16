@@ -8,13 +8,22 @@
 </head>
 <body>
     <?php
+        include '../template/navbar.php';
         require_once('../config/db_config.php');
         require_once('../config/auth.php');
         $email = $_SESSION['user']['email'];
     ?>
+    <style>
+    .form-control{
+        margin-bottom: 10px;
+    }
+    </style>
+    <br>
+    <br>
+    <div class="container">
     <form action="" method="post">
-        <input type="number" name="saldo-transfer" placeholder="masukan jumlah transfer" required>
-        <select name="rekening">
+        <input class="form-control" type="number" name="saldo-transfer" placeholder="masukan jumlah transfer" required>
+        <select name="rekening" class="form-control">
             <?php
                  $q_getrekening = "SELECT * FROM v_rekening WHERE email = :email";
                  $params = array(
@@ -30,9 +39,9 @@
 
                  <?php } ?>
         </select> 
-        <input type="submit" name="transfer-bank" value="Transfer">
+        <input type="submit" name="transfer-bank" class="btn btn-primary" value="Transfer">
     </form>
-    
+    </div>
     <?php
         if (isset($_POST['transfer-bank'])) {
             $saldotransfer = filter_input(INPUT_POST, 'saldo-transfer', FILTER_SANITIZE_STRING);
@@ -79,10 +88,10 @@
                         );
                         $stmt = $dbh->prepare($q_updatesaldo);
                         $stmt->execute($params);
-                        header('Location: transfer_bank.php');
+                        header('Location: dashboard.php');
                     }
                     
-                }else if($hasil < 0) {
+                }else if($result < 0) {
                     print('anda melibihi saldo yang anda punya');
                 }
             }else{
