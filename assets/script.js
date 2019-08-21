@@ -7,15 +7,20 @@ function top_up() {
     });
 }
 
-function topup_hapus() {
-    var topup_id = $(".delete_topup").attr("id");
-    var topup_notif = $("#topup-notif");
+function user_login() {
+    var data = $('#login-form').serialize();
     $.ajax({
-        url: "top-up-hapus.php",
-        method : "POST",
-        data: {topup_id:topup_id},
-        success: function() {
-            
+        url: "api/user_login.php",
+        method : "post",
+        data : data,
+        dataType : "json",
+        success: function(response) {
+            if (response.status == "sukses") {
+                $(".alert").hide();
+                window.location.replace("myaccount/dashboard.php");
+            }else if(response.status == "gagal"){
+                $(".alert").show();
+            }
         }
     });
 }
@@ -45,7 +50,7 @@ function checkConnectedBank() {
 
 function getBank() {
     $.ajax({
-        url : "getBank.php",
+        url : "../api/getBank.php",
         method : "GET",
         dataType : "json",
         success: function(response) {
@@ -60,12 +65,37 @@ function getBank() {
 function connectBank() {
     var data = $('#bank-form').serialize();
     $.ajax({
-        url : "bank-register.php",
+        url : "../api/bank-register.php",
         method : "POST",
         data: data,
-        success: function() {
-            checkConnectedBank();
-            $('#bank-modal').modal('hide');  
+        dataType : 'json',
+        success: function(response){
+            if (response.status == 'berhasil') {
+                checkConnectedBank();
+                $('#bank-modal').modal('hide');
+            } 
         }
     });
+}
+
+function disconnectBank() {
+    var data = $(".disconnect-bank").attr('id');
+    $.ajax({
+        url : "../api/bank-remove.php",
+        method : "POST",
+        data: {rek:data},   
+        success: function() {
+            checkConnectedBank();
+        }
+    });
+}
+
+function getActivity() {
+    $.ajax({
+        url : "../api/getActivity.php",
+        method : "GET",
+        success: function(response) {
+              $(".activity-body").html(response);
+        }
+    }); 
 }
