@@ -17,10 +17,10 @@
       <li class="nav-item active">
         <a class="nav-link" href="dashboard.php">Dashboard<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="transfer.php">Transfer Saldo</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="withdraw.php">Cairkan saldo</a>
       </li>
     </ul>
