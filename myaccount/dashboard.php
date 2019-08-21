@@ -27,7 +27,7 @@
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $uname = $user['nama'];
-        $saldo = $user['jumlah_saldo'];
+        $saldo = $user['saldo'];
     ?>
     <?php
 
@@ -56,23 +56,25 @@
                 </div>
                 </div>
 
-                <div class="card activity d-none">
+                <div class="card activity">
                   <div class="card-body">
                       <h5 class="card-title">Aktivitas Terkini</h5>
-                      <p class="card-text">Tidak ada aktivitas apapun</p>
+                      <div class="activity-body">
+                      
+                      </div>
+                      
+                      <script>
+                        getActivity();
+                      </script>
                   </div>
                 </div>
             </div>
             <div class="col-5 pp-sidebar">
 
-            <script>
-            // Ajax function here
-            checkConnectedBank();
-            getBank();
-            </script>
-
             <div class="card" id="bank-card">
-              
+            <script>
+              checkConnectedBank();
+            </script>
             </div>
 
             <div class="card">
@@ -80,14 +82,15 @@
                     <h5 class="card-title">Top-up</h5>
                     <?php
                     if ($gettopup == false) {?>
-                      <p class="card-text">Tidak ada aktivitas apapun</p>
+                      <p class="card-text">Tidak ada aktivitas Top-up</p>
                     <?php }else {
                       foreach ($gettopup as $row) {?>
                         <div class="alert alert-dark" role="alert" id="topup-notif">
                           <p>Jumlah Topup Rp.<?= $row['jumlah_topup']?></p>
                           <p>ID Top-up No. <?= $row['id_topup'] ?></p>
-                            <a href="top-up-hapus.php?id=<?= $row['id_topup'] ?>" class="btn btn-dark delete-topup">Hapus</button>
                             <a href="top-up-confirm.php?id=<?= $row['id_topup'] ?>" class="btn btn-dark">Detail</a>
+                            <a href="top-up-hapus.php?id=<?= $row['id_topup'] ?>" class="btn btn-danger delete-topup">Hapus</a>
+                            
                         </div>
                     <?php } 
                     }?>
@@ -137,12 +140,12 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form method="post" id="bank-form">
+          <form id="bank-form">
           <div class="modal-body">
               <div class="form-group">
                 <label for="jumlah-topup">Jumlah Top-up</label>
                 <select class="form-control" id="nama-bank" name="kode-bank">
-                  <!-- Js in Here -->
+                  <script>getBank()</script>
                 </select>
                 <div class="form-group">
                   <label for="no-rekening">No. Rekening</label>
@@ -153,9 +156,22 @@
           <div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button onclick="connectBank()" type="button" class="btn btn-primary">Hubungkan</button>
+            <button type="button" class="btn btn-primary" id="bank-submit">Hubungkan</button>
+          </form>  
+            <script>
+              /* Click Enter bank forum */
+              $("#bank-submit").click(function() {
+                connectBank();
+              });
+              $("#bank-form").keypress(function(e) {
+                var key = e.which;
+                if (key == '13') {
+                  connectBank();
+                  return false;
+                }
+              })
+            </script>
             
-            </form>
           </div>
         </div>
       </div>
