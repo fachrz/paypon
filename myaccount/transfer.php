@@ -26,14 +26,7 @@
             <button type="submit" name="transfer" class="btn btn-primary btn-transfer">Transfer</button>
         </form>
     </div>
-    <!-- <form action="" method="post">
-        <input type="number" name="saldo-transfer" placeholder="masukan jumlah transfer" required>
-        <input type="email" name="email-tujuan" placeholder="Masukan Email Tujuan" required>
-        <input type="text" name="deskripsi" placeholder="Masukan deskripsi (Optional)">
-        <input type="submit" name="transfer" value="Transfer">
-    </form>
-     -->
-    
+
     <?php
         if (isset($_POST['transfer'])) {
 
@@ -43,7 +36,7 @@
             $tgltransfer = date('Y-m-d H:i:s');
             $deskripsi = filter_input(INPUT_POST, 'deskripsi', FILTER_SANITIZE_STRING);
 
-            $query = "SELECT email, jumlah_saldo FROM account WHERE email = :emailtujuan";
+            $query = "SELECT email, saldo FROM account WHERE email = :emailtujuan";
             $params = array(
                 ":emailtujuan" => $emailtujuan,
             );
@@ -52,17 +45,17 @@
             $checking = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($checking) {
-                $query1 = "SELECT jumlah_saldo FROM account WHERE email = :email";
+                $query1 = "SELECT saldo FROM account WHERE email = :email";
                 $params = array(
                     ":email" => $email,
                 );
                 $stmt = $dbh->prepare($query1);
                 $stmt->execute($params);
                 $calc = $stmt->fetch(PDO::FETCH_ASSOC);
-                $hasil = $calc['jumlah_saldo'] - $saldotransfer;
+                $hasil = $calc['saldo'] - $saldotransfer;
                
                 if ($hasil >= 50000) {
-                    $query2 = "INSERT INTO transfer (email, tgl_transfer, jumlah_transfer, email_tujuan, deskripsi) VALUES (:email, :tgl_transfer, :jumlah_transfer, :email_tujuan, :deskripsi)";
+                    $query2 = "INSERT INTO tb_transfer (email, tgl_transfer, jumlah_transfer, email_tujuan, deskripsi) VALUES (:email, :tgl_transfer, :jumlah_transfer, :email_tujuan, :deskripsi)";
                     $stmt = $dbh->prepare($query2);
         
                     $params = array(
@@ -76,24 +69,50 @@
                     $updatestatus = $stmt->execute($params);
 
                     if ($updatestatus) {
-                        $query3 = "UPDATE account SET jumlah_saldo = :hasil WHERE email = :email";
+                        $query3 = "UPDATE account SET saldo = :hasil WHERE email = :email";
                         $params = array(
                             ":email" => $email,
                             ":hasil" => $hasil
                         );
                         $stmt = $dbh->prepare($query3);
-                        $stmt->execute($params);
-                        header('Location: transfer.php');
+                        $akumulasi = $stmt->execute($params);
+                        if ($akumulasi) {
+                            $query5 = "INSERT INTO tb_aktivitas VALUES ('', :email, :tipe_aktivitas, :saldo_aktivitas, :tgl_aktivitas)";
+                            $params = array(
+                                ":email" => $email,
+                                ":tgl_aktivitas" => $tgltransfer,
+                                ":saldo_aktivitas" => $saldotransfer,
+                                ":tipe_aktivitas" => "transfer",
+                                
+                            );
+                            $stmt = $dbh->prepare($query5);
+                            $stmt->execute($params);
+                        }
+                        
                     }
-                    $saldo_emailtujuan = $checking['jumlah_saldo'] + $saldotransfer;
-                    $query4 = "UPDATE account SET jumlah_saldo = :hasil WHERE email = :emailtujuan";
+
+                    $saldo_emailtujuan = $checking['saldo'] + $saldotransfer;
+                    $query4 = "UPDATE account SET saldo = :hasil WHERE email = :emailtujuan";
                     $params = array(
                         ":emailtujuan" => $emailtujuan,
                         ":hasil" => $saldo_emailtujuan
-                    );
+                    );  
                     $stmt = $dbh->prepare($query4);
-                    $stmt->execute($params);
+                    $updatesaldotransfer = $stmt->execute($params);
+                    if ($updatesaldotransfer) {
+                        $query5 = "INSERT INTO tb_aktivitas VALUES ('', :email, :tipe_aktivitas, :saldo_aktivitas, :tgl_aktivitas)";
+                        $params = array(
+                                ":email" => $emailtujuan,
+                                ":tgl_aktivitas" => date('Y-m-d H:i:s'),
+                                ":saldo_aktivitas" => $saldotransfer,
+                                ":tipe_aktivitas" => "terima transfer",
+                        );
+                        $stmt = $dbh->prepare($query5);
+                        $stmt->execute($params);
+                    }
                     
+                    
+
                 }else if($hasil <= 50000) {
                     print('Sisa saldo anda tidak mencukupi untuk transfer');
                 }
