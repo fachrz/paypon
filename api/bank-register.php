@@ -2,10 +2,7 @@
         include('../config/db_config.php');
         session_start();     
         $email = $_SESSION['user']['email'];
-    ?>
-<?php
-            header("Content-type:application/json");
-            
+         
             $bank = $_POST['kode-bank'];
             $rekening = $_POST['no-rekening'];
             
@@ -19,9 +16,15 @@
             $stmt = $dbh->prepare($q_bankregister);
             $bankregister = $stmt->execute($params);
             if ($bankregister) {
-                header("Location: bank.php");   
+               $response = array(
+                   'status' => 'berhasil' , 
+                ); 
+                echo json_encode($response);
             }else{
-                print('Bank gagal di hubungkan');
+                $response = array(
+                    'status' => 'gagal' , 
+                );
+                echo json_encode($response); 
             }
         
 ?>
