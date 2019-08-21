@@ -19,9 +19,9 @@
             </div>
             <div class="card-body">
                 No. Rekening
-                <p class="card-text"><?= $bankregistered['nomor_rekening'] ?></p>
-                <a href="bank-remove.php?rek=<?= $bankregistered['nomor_rekening'] ?>" class="btn btn-primary">Putuskan</a>
-            </div>
+                <p class="card-text"><?= $bankregistered['no_rek'] ?></p>
+                <button onclick="disconnectBank()" id="<?= $bankregistered['no_rek'] ?>" class="btn btn-primary disconnect-bank">Putuskan</button>
+            </div>  
         <?php } else if ($bankregistered == false) {?>
             <div class="card-body">
                     <h5 class="card-title">Hubungkan dengan bank anda</h5>
