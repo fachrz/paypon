@@ -61,3 +61,28 @@
 .btn-transfer{
     margin-top: 10px;
 }
+
+.activity-bar{
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.activity-date, .activity-description{
+    padding: 12px 10px;
+}
+.activity-saldo{
+    padding: 12px 10px !important;
+}
+.activity-date{
+    color: #fff;
+    background: #dc3545 ;
+    border-radius: 5px 0px 0px 5px;
+    margin-right: 10px;
+}
+
+#login-alert{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border-radius: 0px !important;    
+    text-align: center;
+}
