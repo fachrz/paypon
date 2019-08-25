@@ -29,6 +29,10 @@
                 echo json_encode($status);
             }
         }else{
-
+            $status = array(
+                "status" => "tidak terdaftar", 
+            );
+            echo json_encode($status);
         }
+        
 ?>
