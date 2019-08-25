@@ -7,36 +7,59 @@ function top_up() {
     });
 }
 
-function user_login() {
-    var data = $('#login-form').serialize();
+function notification(message, type, width) {
+    var div = "<div class="+ "notification" +">"+ message +"</div>";
+    var button = "<button class="+ "button-close" +"></button>";
+    $('.alert-container').append(div);
+    $('.alert-container').css("max-width", width)
+    $('.notification').addClass("alert "+ type +" alert-dismissible fade show").append(button);
+    $('.button-close').attr('type', 'button').attr('data-dismiss', 'alert').addClass('close');
+    $('.button-close').append('<span>&times</span>');
+}
+
+function user_login(email, password) {
     $.ajax({
         url: "api/user_login.php",
         method : "post",
-        data : data,
+        data : {
+            "email" : email,
+            "password" : password
+        },
         dataType : "json",
         success: function(response) {
             if (response.status == "sukses") {
-                $(".alert").hide();
-                window.location.replace("myaccount/dashboard.php");
+                window.location.replace("myaccount/dashboard.php", "alert-success", "300px");
             }else if(response.status == "gagal"){
-                $(".alert").show();
+                notification("Email atau Password salah", "alert-danger", "300px");
+            }else if(response.status == "tidak terdaftar"){
+                notification("Email tidak terdaftar", "alert-danger", "300px")
             }
         }
     });
 }
-
-// function getTopup() {
-//     $.ajax({
-//         url : "getTopup.php",
-//         method : "GET",
-//         dataType : "json",
-//         success: function(response) {
-//             response.forEach(topupdata => {
-//                 console.log(topupdata.jumlah_topup);
-//             });
-//         }
-//     })
-// }
+function user_register(email, password, nama, no_telp, alamat) {
+    $.ajax({
+        url: "api/user_register.php",
+        method : "post",
+        data : {
+            "email" : email,
+            "password" : password,
+            "nama" : nama,
+            "no_telp" : no_telp,
+            "alamat" : alamat
+        },
+        dataType : "json",  
+        success: function(response) {
+            if (response.status == "sukses") {
+                notification("Akun berhasil didaftarkan", "alert-success", "600px");
+            }else if(response.status == "gagal"){
+                notification("Akun gagal didaftarkan", "alert-danger", "600px");
+            }else if(response.status == "terdaftar"){
+                notification("Tidak bisa didaftarkan, Email sudah terdaftar", "alert-danger","600px");
+            }
+        }
+    });
+}
 
 function checkConnectedBank() {
     $.ajax({
