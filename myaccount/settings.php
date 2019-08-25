@@ -40,12 +40,6 @@
             <label for="inputAddress2">Address</label>
             <input type="text" class="form-control" id="inputAddress2" value="<?= $user['alamat']; ?>">
 
-            <label for="inputCity">City</label>
-            <input type="text" class="form-control" id="inputCity">
-
-            <label for="inputZip">Zip</label>
-            <input type="text" class="form-control" id="inputZip">
-
             <button type="submit" class="btn btn-primary">Simpan</button>
         </div>  
 
