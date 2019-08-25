@@ -12,46 +12,40 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="assets/script.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap" rel="stylesheet">
+    <?php
+        include 'session.php';
+    ?>
     
-    <title>Paypon-login</title>
+    <title>Paypon Login</title>
 </head>
 <body>
 <div class="login-container">
-    <i class="fas fa-money-bill-wave"></i>
-    <h1>Paypon</h1>
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Email atau Password</strong> yang anda masukan salah!!
+    <h1 class="logo">Pay<span>Pon</span></h1>
+    <div class="alert-container">
+
     </div>
-    
-    <form method="post" class="login-form border" id="login-form">
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-    </div>
-    <button id="login-submit" type="button" name="login" class="btn btn-primary btn-block">Login</button>
+    <form action="" method="post" class="login-form border">
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Masukan Email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control" id="password" placeholder="Masukan Password" required>
+        </div>
+        <input id="login-submit" type="submit" name="login" class="btn btn-danger btn-block" value="Login">
     </form>
-    <p>Nggk punya akun? <a href="register.php">Daftar yuk!!</a></p>
-    <script>
-        $(document).ready(function() {
-            $(".alert").hide();
-            $("#login-submit").click(function() {
-                user_login();
-              });
-              $("#login-form").keypress(function(e) {
-                var key = e.which;
-                if (key == '13') {
-                  user_login();
-                  return false;
-                }
-              })
-        })
-        
-    </script>
+    <p class="register-section">Nggk punya akun? <a href="register.php">Daftar yuk!!</a></p>
+    <?php
+        $email =  filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+        $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+
+        if ($email == "" || $password == ""){
+            
+        }else if ($email !== "" && $password !== "") {?>
+            <script>user_login("<?= $email ?>", "<?= $password ?>")</script>
+    <?php } ?> 
 </div>
 </body>
 </html>
