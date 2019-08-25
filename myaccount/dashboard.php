@@ -8,7 +8,7 @@
         require_once("../config/auth.php");
         require_once("../config/db_config.php");
     ?>
-    <title>Document</title>
+    <title>Dashboard</title>
 </head>
 
 <body>
@@ -89,7 +89,7 @@
                           <p>Jumlah Topup Rp.<?= $row['jumlah_topup']?></p>
                           <p>ID Top-up No. <?= $row['id_topup'] ?></p>
                             <a href="top-up-confirm.php?id=<?= $row['id_topup'] ?>" class="btn btn-dark">Detail</a>
-                            <a href="top-up-hapus.php?id=<?= $row['id_topup'] ?>" class="btn btn-danger delete-topup">Hapus</a>
+                            <a href="top-up-hapus.php?id=<?= $row['id_topup'] ?>" class="btn btn-danger delete-topup">Batalkan</a>
                             
                         </div>
                     <?php } 
