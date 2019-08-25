@@ -1,16 +1,26 @@
-/* Login Form */
-.login-form{
-    max-width: 300px;
-    padding: 10px;
-    margin: 20px auto;
-    border-radius: 6px;
-    text-align: left;
-    
+.logo{
+    font-family: 'Lexend Deca', sans-serif;
+    color: #dc3545 !important;
 }
+.logo span{
+    color: #fff;
+    border: 1px solid;
+    padding:0px 5px;
+    margin: 0px 4px;
+    background: #dc3545;
+}
+/* Start Login Page */
 .login-container{
     margin: auto;
     text-align: center;
     margin-top: 70px;
+}
+.login-form{
+    max-width: 300px;
+    padding: 10px;
+    margin: auto;
+    border-radius: 6px;
+    text-align: left;
 }
 .login-container i{
     font-size: 40px;
@@ -18,7 +28,28 @@
 .login-container i, .login-container h1{
     color: #9697a7  ;
 }
+.register-section{
+    margin-top: 20px;
+}
+.register-section a{
+    color: #dc3545;
+}
+.register-section a:hover{
+    color: #dc3545
+}
+.alert-container{ 
+    max-width: 300px;
+    margin: 30px auto 0px;
+}
 
+/* Register Page */
+.register-form{
+    max-width: 600px;
+    padding: 10px;
+    margin: auto;
+    border-radius: 6px;
+    text-align: left;
+}
 
 
 .pp-sidebar{
@@ -79,10 +110,4 @@
     margin-right: 10px;
 }
 
-#login-alert{
-    position: absolute;
-    top: 0;
-    width: 100%;
-    border-radius: 0px !important;    
-    text-align: center;
-}
+
