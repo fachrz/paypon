@@ -26,6 +26,6 @@
             <div class="card-body">
                     <h5 class="card-title">Hubungkan dengan bank anda</h5>
                     <p class="card-text">Anda sama sekali belum menghubungkan bank ke akun anda. silahkan hubungkan untuk menghilangkan batasan!</p>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#bank-modal">Hubungkan Bank</button>
+                    <button class="btn btn-danger" data-toggle="modal" data-target="#bank-modal">Hubungkan Bank</button>
             </div>
         <?php } ?>
