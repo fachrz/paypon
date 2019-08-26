@@ -1,3 +1,6 @@
+body{
+    background: #fdfdfd !important;
+}
 .logo{
     font-family: 'Lexend Deca', sans-serif;
     color: #dc3545 !important;
@@ -51,7 +54,20 @@
     text-align: left;
 }
 
+/* Paypon Card */
+.card{
+    border: none !important;
+    background: #fff !important;
+    box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
+}
+.paypon-card h6{
+    font-family: 'Lexend Deca', sans-serif;
+}
 
+/* Paypoon Navbar */
+.paypon-navbar{
+    box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
+}
 .pp-sidebar{
     padding: 0 10px !important;
 }
