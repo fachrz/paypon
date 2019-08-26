@@ -48,11 +48,11 @@
         <div class="row no-gutters">
             <div class="col-lg">
                 <div class="card">  
-                <div class="card-body text-center">
+                <div class="card-body text-center paypon-card">
                     <i class="fas fa-money-bill-wave"></i>
-                    <h6>Saldo Paypon Anda</h6>
+                    <h6>Saldo <span>PayPon</span> Anda</h6>
                     <h2 class="card-text">Rp. <?= $saldo ?></h2>
-                    <button onclick="top_up()" id="btn-topup" class="btn btn-primary btn-topup" data-toggle="modal" data-target="#topup-modal">Top-up</button>   
+                    <button onclick="top_up()" id="btn-topup" class="btn btn-danger btn-topup" data-toggle="modal" data-target="#topup-modal">Top-up</button>   
                 </div>
                 </div>
 
@@ -156,7 +156,7 @@
           <div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="bank-submit">Hubungkan</button>
+            <button type="button" class="btn btn-danger" id="bank-submit">Hubungkan</button>
           </form>  
             <script>
               /* Click Enter bank forum */
