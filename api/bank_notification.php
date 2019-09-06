@@ -14,13 +14,21 @@
         $bankregistered = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if ($bankregistered) {?>
-            <div class="card-header">
+            <div class="card-header bank-header">
                 <?= $bankregistered['nama_bank'] ?>
             </div>
             <div class="card-body">
-                No. Rekening
-                <p class="card-text"><?= $bankregistered['no_rek'] ?></p>
-                <button onclick="disconnectBank()" id="<?= $bankregistered['no_rek'] ?>" class="btn btn-primary disconnect-bank">Putuskan</button>
+                <div class="row">
+                    <div class="col-7">
+                        No. Rekening
+                        <p class="card-text"><?= $bankregistered['no_rek'] ?></p>
+                    </div>
+                    <div class="col-5 justify-content-center align-self-center">
+                    <button onclick="disconnectBank()" id="<?= $bankregistered['no_rek'] ?>" class="btn btn-danger disconnect-bank d-flex">Putuskan</button>
+                    </div>
+            </div>  
+               
+                
             </div>  
         <?php } else if ($bankregistered == false) {?>
             <div class="card-body">

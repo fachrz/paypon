@@ -25,7 +25,7 @@
     <div class="alert-container">
 
     </div>
-    <form action="" method="post" class="login-form border">
+    <form action="" method="post" class="login-form">
         <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Masukan Email" required>

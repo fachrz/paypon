@@ -28,7 +28,7 @@
         </tr>
         
         <?php
-
+            date_default_timezone_set('Asia/Jakarta');
             $email = $_SESSION['user']['email'];
             if (!empty($_POST)) {
                 $saldo_topup = filter_input(INPUT_POST, 'jumlah-topup', FILTER_SANITIZE_STRING);

@@ -28,6 +28,7 @@
     </div>
 
     <?php
+    date_default_timezone_set('Asia/Jakarta');
         if (isset($_POST['transfer'])) {
 
             $email = $_SESSION['user']['email'];
@@ -77,11 +78,12 @@
                         $stmt = $dbh->prepare($query3);
                         $akumulasi = $stmt->execute($params);
                         if ($akumulasi) {
-                            $query5 = "INSERT INTO tb_aktivitas VALUES ('', :email, :tipe_aktivitas, :saldo_aktivitas, :tgl_aktivitas)";
+                            $query5 = "INSERT INTO tb_aktivitas VALUES ('', :email, :tipe_aktivitas, :email_terkait, :saldo_aktivitas, :tgl_aktivitas)";
                             $params = array(
                                 ":email" => $email,
                                 ":tgl_aktivitas" => $tgltransfer,
                                 ":saldo_aktivitas" => $saldotransfer,
+                                ":email_terkait" => $emailtujuan,
                                 ":tipe_aktivitas" => "transfer",
                                 
                             );
@@ -100,12 +102,15 @@
                     $stmt = $dbh->prepare($query4);
                     $updatesaldotransfer = $stmt->execute($params);
                     if ($updatesaldotransfer) {
-                        $query5 = "INSERT INTO tb_aktivitas VALUES ('', :email, :tipe_aktivitas, :saldo_aktivitas, :tgl_aktivitas)";
+                        $query5 = "INSERT INTO tb_aktivitas VALUES ('', :email, :tipe_aktivitas, :email_terkait, :saldo_aktivitas, :tgl_aktivitas)";
                         $params = array(
                                 ":email" => $emailtujuan,
-                                ":tgl_aktivitas" => date('Y-m-d H:i:s'),
-                                ":saldo_aktivitas" => $saldotransfer,
                                 ":tipe_aktivitas" => "terima transfer",
+                                ":email_terkait" => $email,
+                                ":saldo_aktivitas" => $saldotransfer,
+                                ":tgl_aktivitas" => date('Y-m-d H:i:s'),
+                                
+                                
                         );
                         $stmt = $dbh->prepare($query5);
                         $stmt->execute($params);

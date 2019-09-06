@@ -44,6 +44,9 @@
     ?>
     
     <div class="container dashboard-container">
+    <div class="alert-container d-none">
+
+    </div>
     <h1 class="dashboard-user text-center">Selamat Datang, <?= $uname ?></h1> 
         <div class="row no-gutters">
             <div class="col-lg">
@@ -51,7 +54,7 @@
                 <div class="card-body text-center paypon-card">
                     <i class="fas fa-money-bill-wave"></i>
                     <h6>Saldo <span>PayPon</span> Anda</h6>
-                    <h2 class="card-text">Rp. <?= $saldo ?></h2>
+                    <h2 class="card-text">Rp. <?= number_format($saldo,2,',','.')?></h2>
                     <button onclick="top_up()" id="btn-topup" class="btn btn-danger btn-topup" data-toggle="modal" data-target="#topup-modal">Top-up</button>   
                 </div>
                 </div>
@@ -70,7 +73,6 @@
                 </div>
             </div>
             <div class="col-5 pp-sidebar">
-
             <div class="card" id="bank-card">
             <script>
               checkConnectedBank();
@@ -85,13 +87,20 @@
                       <p class="card-text">Tidak ada aktivitas Top-up</p>
                     <?php }else {
                       foreach ($gettopup as $row) {?>
-                        <div class="alert alert-dark" role="alert" id="topup-notif">
-                          <p>Jumlah Topup Rp.<?= $row['jumlah_topup']?></p>
-                          <p>ID Top-up No. <?= $row['id_topup'] ?></p>
-                            <a href="top-up-confirm.php?id=<?= $row['id_topup'] ?>" class="btn btn-dark">Detail</a>
-                            <a href="top-up-hapus.php?id=<?= $row['id_topup'] ?>" class="btn btn-danger delete-topup">Batalkan</a>
-                            
+                      <div class="topup-bar clearfix" id="topup-notif">
+                        <div class="row no-gutters text-center">
+                          <div class="col-sm-2 topup-id">
+                            <?= $row['id_topup'] ?>
+                          </div>
+                          <div class="col-sm-7 text-left topup-saldo">
+                            Rp. <?= number_format($row['jumlah_topup'],2,',','.') ?>
+                          </div>
+                          <div class="col-3 topup-option">
+                            <a href="top-up-confirm.php?id=<?= $row['id_topup'] ?>"><i class="fas fa-file-invoice"></i></a>
+                            <a href="top-up-hapus.php?id=<?= $row['id_topup'] ?>"><i class="fas fa-trash-alt"></i></a>
+                          </div>
                         </div>
+                      </div>  
                     <?php } 
                     }?>
                      
@@ -117,13 +126,15 @@
             <div class="form-group">
                   <label for="jumlah-topup">Jumlah Top-up</label>
                   <select class="form-control" id="jumlah-topup" name="jumlah-topup">
-                    <option value="100000">Rp. 100.000</option>
+                    <option value="100000">Rp. 100.000,00</option>
+                    <option value="200000">Rp. 200.000,00</option>
+                    <option value="300000">Rp. 300.000,00</option>
                   </select>
               </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <input type="submit" name="topup-submit" id="topup-submit" class="btn btn-primary" value="Top-up">
+            <input type="submit" name="topup-submit" id="topup-submit" class="btn btn-danger" value="Top-up">
           </div>
           </form>
         </div>
@@ -143,15 +154,16 @@
           <form id="bank-form">
           <div class="modal-body">
               <div class="form-group">
-                <label for="jumlah-topup">Jumlah Top-up</label>
+                <label for="jumlah-topup">Nama Bank</label>
                 <select class="form-control" id="nama-bank" name="kode-bank">
                   <script>getBank()</script>
                 </select>
+                </div>
                 <div class="form-group">
                   <label for="no-rekening">No. Rekening</label>
                   <input type="text" class="form-control" name="no-rekening" id="no-rekening" aria-describedby="emailHelp" placeholder="Masukan no rekening">
                 </div>
-              </div>
+              
           </div>
           <div>
           <div class="modal-footer">
@@ -178,19 +190,3 @@
 
 </body>
 </html>
-
-
-
-
-<!-- <a href="transfer.php">Transfer Saldo</a>
-<a href="withdraw.php">Cairkan Saldo</a>
-<a href="top-up.php">Top-up Saldo</a>
-<a href="bank.php">Hubungkan Dengan Bank</a>
-<br><br>
-
-Selamat Datang, <?= $uname ?><br>
-saldo <?= $saldo ?><br>
-<a href="settings.php">Account Settings</a>
-<a href="logout.php">Logout</a> -->
-
- 

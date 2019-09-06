@@ -89,12 +89,13 @@
                         $stmt = $dbh->prepare($q_updatesaldo);
                         $updatesaldo = $stmt->execute($params);
                         if ($updatesaldo) {
-                            $query5 = "INSERT INTO tb_aktivitas VALUES ('', :email, :tipe_aktivitas, :saldo_aktivitas, :tgl_aktivitas)";
+                            $query5 = "INSERT INTO tb_aktivitas VALUES ('', :email, :tipe_aktivitas, :email_terkait, :saldo_aktivitas, :tgl_aktivitas)";
                             $params = array(
                                     ":email" => $email,
                                     ":tgl_aktivitas" => date('Y-m-d H:i:s'),
                                     ":saldo_aktivitas" => $saldotransfer,
                                     ":tipe_aktivitas" => "transfer bank",
+                                    ":email_terkait" => $email
                             );
                             $stmt = $dbh->prepare($query5);
                             $stmt->execute($params);

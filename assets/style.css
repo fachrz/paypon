@@ -24,12 +24,14 @@ body{
     margin: auto;
     border-radius: 6px;
     text-align: left;
+    border: none !important;
+    box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
 }
 .login-container i{
     font-size: 40px;
 }
-.login-container i, .login-container h1{
-    color: #9697a7  ;
+.login-container h1{
+    margin-bottom: 30px;
 }
 .register-section{
     margin-top: 20px;
@@ -42,7 +44,7 @@ body{
 }
 .alert-container{ 
     max-width: 300px;
-    margin: 30px auto 0px;
+    margin: 0px auto 0px;
 }
 
 /* Register Page */
@@ -62,6 +64,16 @@ body{
 }
 .paypon-card h6{
     font-family: 'Lexend Deca', sans-serif;
+}
+
+/* Bank Card */
+.bank-header{
+    background: #fa5477 !important;
+    border: none !important;
+    color: #fff;
+}
+.disconnect-bank{
+    margin: auto;
 }
 
 /* Paypoon Navbar */
@@ -97,8 +109,17 @@ body{
     margin-bottom: 10px;
 }
 .delete-topup{
-    margin-right: 5px;  
+    
 }
+.delete-topup i{
+    color: #fa5477;
+    font-size: 15px;
+     
+}
+.test{
+    position: relative;
+}
+
 .form-deskripsi{
     margin-top: 10px;
 }
@@ -109,12 +130,62 @@ body{
     margin-top: 10px;
 }
 
+
+
+/* Top-up Bar */
+.topup-bar{
+    border-radius: 5px;
+    margin-bottom: 15px;
+    transition: ease 0.2s;
+    background: #fdfdfd;
+    box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
+}
+.topup-id, .topup-saldo, .topup-option{
+    padding: 12px 10px;
+}
+.topup-id{
+    color: #fff;
+    background: #dc3545 ;
+    border-radius: 5px 0px 0px 5px;
+}
+.topup-saldo{
+    padding-left: 10px !important;
+}
+
+.topup-option a i{
+    font-size: 17px;
+    margin: 0px;
+    transition: ease 0.2s;
+}
+.topup-option a i:hover{
+    color: #dc3545;
+}
+.topup-option a{
+   margin: 10px;
+}
+.topup-option .test{
+    margin-right: 0px !important;
+}
+
+
+
 .activity-bar{
     border-radius: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    transition: ease 0.2s;
+    background: #fdfdfd;
+    box-shadow: 0 10px 40px -10px rgba(0,64,128,.2);
+
+}
+.activity-bar:hover{
+    box-shadow: none;
+    cursor: pointer;
 }
 .activity-date, .activity-description{
     padding: 12px 10px;
+}
+.activity-description{
+   padding-left: 10px !important;
 }
 .activity-saldo{
     padding: 12px 10px !important;
@@ -123,7 +194,6 @@ body{
     color: #fff;
     background: #dc3545 ;
     border-radius: 5px 0px 0px 5px;
-    margin-right: 10px;
 }
 
 

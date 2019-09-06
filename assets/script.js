@@ -96,6 +96,8 @@ function connectBank() {
             if (response.status == 'berhasil') {
                 checkConnectedBank();
                 $('#bank-modal').modal('hide');
+                $('.alert-container').removeClass('d-none');
+                notification("Bank berhasil di hubungkan", "alert-success", "100%");
             } 
         }
     });

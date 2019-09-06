@@ -15,21 +15,30 @@
 
         if ($getActivity) {
             foreach ($getActivity as $activity) {?>
-                <div class="activity-bar border clearfix" id="topup-notif">
+                <div class="activity-bar clearfix" id="topup-notif">
                     <div class="row no-gutters text-center">
                         <div class="col-sm-3 activity-date"><?= date('Y-m-d', strtotime($activity['tgl_aktivitas'])) ?></div>
-                        <div class="col text-left activity-description"><?=  ucfirst($activity['tipe_aktivitas'])?></div>
-                        <div class="col-5 activity-saldo text-right"><?php
+                        <div class="col-sm-5 text-left activity-description"><?php
+                            if ($activity['tipe_aktivitas'] == 'transfer') {
+                                echo ucfirst($activity['tipe_aktivitas'])." Ke ".$activity['email_terkait'];
+                            }else if ($activity['tipe_aktivitas'] == 'terima transfer') {
+                                echo ucfirst($activity['tipe_aktivitas'])." Dari ".$activity['email_terkait'];
+                            }else if ($activity['tipe_aktivitas'] == 'withdraw'){
+                                echo ucfirst($activity['tipe_aktivitas'])." Ke ".$activity['email_terkait'];
+                            }else if ($activity['tipe_aktivitas'] == 'transfer bank'){
+                                echo ucwords($activity['tipe_aktivitas']);
+                            }
+                            
+                        ?></div>
+                        <div class="col-4 activity-saldo text-right"><?php
                         if ($activity['tipe_aktivitas'] == 'transfer') {
-                            echo "-Rp.".$activity['saldo_aktivitas'];
-                        }else if ($activity['tipe_aktivitas'] == 'withdraw') {
-                            echo "-Rp.".$activity['saldo_aktivitas'];
+                            echo "- Rp.".number_format($activity['saldo_aktivitas'],2,',','.');
                         }else if ($activity['tipe_aktivitas'] == 'top-up') {
-                            echo "+Rp.".$activity['saldo_aktivitas'];
+                            echo "+ Rp.".number_format($activity['saldo_aktivitas'],2,',','.');
                         }else if($activity['tipe_aktivitas'] == 'terima transfer'){
-                            echo "+Rp.".$activity['saldo_aktivitas'];
+                            echo "+ Rp.".number_format($activity['saldo_aktivitas'],2,',','.');
                         }elseif ($activity['tipe_aktivitas'] == 'transfer bank') {
-                            echo "-Rp.".$activity['saldo_aktivitas'];
+                            echo "- Rp.".number_format($activity['saldo_aktivitas'],2,',','.');
                         }
                         ?></div>
                     </div>
